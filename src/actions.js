@@ -306,6 +306,7 @@ export function login(credentials) {
 
 
         const action = await dispatch(loadUser());
+        dispatch(fetchUserProduct(action?.payload?.username))
         return { loginStatus: action.type, message: action?.payload?.response?.detail ?? "" };
       } catch (error) {
         dispatch(authError({ message: error.message }));
@@ -314,10 +315,13 @@ export function login(credentials) {
     } else {
       await dispatch(refreshAuthToken());
       const action = await dispatch(loadUser());
+      dispatch(fetchUserProduct(action?.payload?.username))
       return { loginStatus: action.type, message: action?.payload?.response?.detail ?? "Error occurred while loading user." };
     }
   };
 }
+
+
 
 export function fetchCsrfToken(jwtToken) {
   return async (dispatch) => {
@@ -333,6 +337,45 @@ export function fetchCsrfToken(jwtToken) {
       }),
     );
   };
+}
+
+export function fetchUserProduct(username) {
+ const query = `query getUserProducts($username: String!) {
+    userProducts(username: $username) {
+      id
+      username
+      iUser {
+        id
+        language
+        lastName
+        otherNames
+        healthFacilityId
+        products {
+          id
+          code
+          name
+          enrolmentPeriodStartDate
+          enrolmentPeriodEndDate
+          membershipTypes {
+            id
+            region
+            district
+            levelType
+            levelIndex
+            price
+          }
+        }
+        rights
+        hasPassword
+        region
+      }
+      tUser {
+        id
+        username
+      }
+    }
+  }`;
+  return graphqlMutation(query, { username }, ["CORE_USER_PRODUCTS_REQ", "CORE_USER_PRODUCTS_RESP", "CORE_USER_PRODUCTS_ERR"]);
 }
 
 export function refreshAuthToken() {

@@ -211,6 +211,7 @@ class Form extends Component {
               contributionKey={contributedPanelsKey}
             />
           )}
+          
         </form>
         {!enableActionButtons && (
           <div className={classes.tooltipContainer}>

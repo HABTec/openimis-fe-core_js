@@ -52,6 +52,8 @@ function reducer(
     fetchedLanguages: false,
     languages: [],
     errorLanguages: null,
+    fetchingUserProduct: false,
+    userProduct: null,
   },
   action,
 ) {
@@ -87,6 +89,24 @@ function reducer(
       return {
         ...state,
         isExportConfigDialogOpen: false,
+      };
+    case "USER_PRODUCT_RESP":
+      return {
+        ...state,
+        userProduct: action.payload.data?.userProducts?.iUser?.products,
+        fetchingUserProduct: false,
+      };
+    case "USER_PRODUCT_ERR":
+      return {
+        ...state,
+        fetchingUserProduct: false,
+        errorPasswordPolicy: formatServerError(action.payload),
+      };
+    case "USER_PRODUCT_REQ":
+      return {
+        ...state,
+        fetchingUserProduct: true,
+        userProduct: null,
       };
     case "CORE_USERS_CURRENT_USER_RESP":
       return {
