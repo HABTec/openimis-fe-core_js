@@ -306,7 +306,10 @@ export function login(credentials) {
 
 
         const action = await dispatch(loadUser());
-        dispatch(fetchUserProduct(action?.payload?.username))
+        if(action?.payload?.username){
+          dispatch(fetchUserProduct(action?.payload?.username))
+        }
+          
         return { loginStatus: action.type, message: action?.payload?.response?.detail ?? "" };
       } catch (error) {
         dispatch(authError({ message: error.message }));
@@ -315,7 +318,9 @@ export function login(credentials) {
     } else {
       await dispatch(refreshAuthToken());
       const action = await dispatch(loadUser());
-      dispatch(fetchUserProduct(action?.payload?.username))
+      if(action?.payload?.username){
+          dispatch(fetchUserProduct(action?.payload?.username))
+        }
       return { loginStatus: action.type, message: action?.payload?.response?.detail ?? "Error occurred while loading user." };
     }
   };
@@ -358,11 +363,15 @@ export function fetchUserProduct(username) {
           enrolmentPeriodEndDate
           membershipTypes {
             id
-            region
-            district
-            levelType
-            levelIndex
-            price
+           region{
+            id
+           }
+           district{
+            id
+           }
+           levelType
+           levelIndex
+           price
           }
         }
         rights
@@ -377,6 +386,8 @@ export function fetchUserProduct(username) {
   }`;
   return graphqlMutation(query, { username }, ["CORE_USER_PRODUCTS_REQ", "CORE_USER_PRODUCTS_RESP", "CORE_USER_PRODUCTS_ERR"]);
 }
+
+
 
 export function refreshAuthToken() {
   return (dispatch) => {
