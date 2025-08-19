@@ -18,6 +18,7 @@ import nepali_np from "../calendars/NepaliLocaleNp";
 
 import gregorian from "react-date-object/calendars/gregorian";
 import gregorian_en from "react-date-object/locales/gregorian_en";
+import EthiopianCalendar from "../components/EthiopianCalendar";
 
 const styles = (theme) => ({
   label: {
@@ -70,9 +71,9 @@ class openIMISDatePicker extends Component {
   };
 
   secondaryCalendarDateChange = (d) => {
-    this.setState({ value: toISODate(d.toDate()) }, (i) =>
-      !!this.props.onChange ? this.props.onChange(toISODate(d.toDate())) : null,
-    );
+     this.setState({ value: d }, (i) =>
+      !!this.props.onChange ? this.props.onChange(d) : null,
+    );   
   };
 
   clearDate = (e) => {
@@ -120,7 +121,7 @@ class openIMISDatePicker extends Component {
       readOnly = false,
       required = false,
       fullWidth = true,
-      format = "DD-MM-YYYY",
+      format = "dd-mm-yyyy",
       reset,
       isSecondaryCalendarEnabled,
       modulesManager,
@@ -139,21 +140,17 @@ class openIMISDatePicker extends Component {
           <label className={classes.label}>
             {!!label ? formatMessage(intl, module, label).concat(required ? " *" : "") : null}
           </label>
-          <DatePicker
-            format={secondCalendarFormatting}
+          <EthiopianCalendar
+          format={secondCalendarFormatting}
             disabled={readOnly}
             value={this.state.value ? this.moveByOneDay(new Date(this.state.value)) : null}
             {...((!!minDate || disablePast) && this.setMinDate())}
             {...(!!maxDate && { maxDate: this.moveByOneDay(new Date(maxDate)) })}
             onChange={this.secondaryCalendarDateChange}
             highlightToday={false}
+            label={!!label ? formatMessage(intl, module, label) : null}
             calendar={this.getDictionaryValueOrDefault(this.secondaryCalendarsOptions, secondCalendarType)}
-            locale={this.getDictionaryValueOrDefault(this.secondaryCalendarsLocaleOptions, secondCalendarLocale)}
-          >
-            <button style={{ margin: "5px" }} onClick={(e) => this.clearDate(e)}>
-              {formatMessage(intl, "core", "calendar.clearButton")}
-            </button>
-          </DatePicker>
+            locale={this.getDictionaryValueOrDefault(this.secondaryCalendarsLocaleOptions, secondCalendarLocale)}/>
         </FormControl>
       );
     } else {
@@ -185,7 +182,7 @@ class openIMISDatePicker extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  isSecondaryCalendarEnabled: state.core.isSecondaryCalendarEnabled ?? false,
+  isSecondaryCalendarEnabled: true,
 });
 
 export default injectIntl(
