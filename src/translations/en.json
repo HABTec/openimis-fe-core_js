@@ -68,6 +68,7 @@
   "core.exportSearchResult.tooltip": "Export result",
   "LanguagePicker.label": "Language",
   "core.Language.null": "",
+  "core.dob": "Birth Date",
   "core.NumberInput.notApplicable": "N/A",
   "core.UserActivityReport.dateFrom": "From",
   "core.UserActivityReport.dateTo": "To",

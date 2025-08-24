@@ -136,6 +136,7 @@ import UserActivityReport from "./reports/UserActivityReport";
 import RegistersStatusReport from "./reports/RegistersStatusReport";
 import SearcherActionButton from "./components/generics/SearcherActionButton";
 import InfoButton from "./components/generics/InfoButton";
+import AgePicker from "./pickers/AgePicker";
 
 const ROUTE_ROLES = "roles";
 const ROUTE_ROLE = "roles/role";
@@ -209,6 +210,7 @@ const DEFAULT_CONFIG = {
 export const CoreModule = (cfg) => {
   let def = { ...DEFAULT_CONFIG };
   def.refs.push({ key: "core.DatePicker", ref: openIMISDatePicker });
+  def.refs.push({ key: "core.AgePicker", ref: AgePicker });
   return { ...def, ...cfg };
 };
 

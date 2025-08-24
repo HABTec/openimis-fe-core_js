@@ -62,7 +62,7 @@ function EthiopianCalendar(props) {
   }, [props.value]);
   return (
     <div className="EthiopianCalendar">
-      {props?.maxDate && JSON.stringify(convertToEthiopianDate(new Date(props?.maxDate).toISOString().substr(0, 10)))}
+      
       <input 
       style={{ 
         border: 'none', 

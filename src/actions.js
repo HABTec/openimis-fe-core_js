@@ -351,7 +351,10 @@ export function fetchUserProduct(username) {
       username
       iUser {
         id
-        language
+         language{
+          code 
+          name
+        }
         lastName
         otherNames
         healthFacilityId
