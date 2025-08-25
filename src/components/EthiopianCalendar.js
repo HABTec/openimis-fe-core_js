@@ -61,8 +61,7 @@ function EthiopianCalendar(props) {
     }
   }, [props.value]);
   return (
-    <div className="EthiopianCalendar">
-      
+    <div className="EthiopianCalendar"
       <input 
       style={{ 
         border: 'none', 
