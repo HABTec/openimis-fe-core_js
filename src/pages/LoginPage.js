@@ -135,7 +135,6 @@ const LoginPage = ({ logo }) => {
                   <img className={classes.logo} src={logo} />
                   {!isWorker && (
                     <Box pl={2} fontWeight="fontWeightMedium" fontSize="h4.fontSize">
-                      {formatMessage("appName")}
                     </Box>
                   )}
                 </Grid>
