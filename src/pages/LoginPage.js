@@ -96,9 +96,6 @@ const LoginPage = ({ logo }) => {
   };
 
   const getErrorMessage = (messageKey) => {
-     if (messageKey == "can't access property \"tokenAuth\", response.payload.data is undefined"){
-      messageKey = 'INCORRECT_CREDENTIALS'
-    }
     return errorMessages[messageKey] || messageKey;
   };
 

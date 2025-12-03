@@ -291,6 +291,11 @@ export function login(credentials) {
             "X-CSRFToken": csrfToken
           }),
         );
+        if(response.error){
+          const errorMessage = response.payload?.response?.errors[0]?.message || "Authentication failed.";
+          dispatch(authError({ message: errorMessage }));
+          return { loginStatus: "CORE_AUTH_ERR", message: errorMessage };
+        }
         if (response.payload?.errors?.length > 0) {
           const errorMessage = response.payload.errors[0].message;
           dispatch(authError({ message: errorMessage }));
