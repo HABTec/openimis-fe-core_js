@@ -67,7 +67,7 @@ function EthiopianCalendar(props) {
         border: 'none', 
         borderBottom: '1px solid black', 
         background: "transparent", 
-        color: 'black',
+        color: props.disabled ? "#635c5c" : 'black',
         width: '100%',
         zIndex: '2000 !important',
         ...(props.disabled ? { borderBottom: '1px solid gray'} : {}), 
