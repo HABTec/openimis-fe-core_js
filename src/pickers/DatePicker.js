@@ -107,7 +107,6 @@ class openIMISDatePicker extends Component {
   // it is possible, that future release of library will fix it
   // making this method redundant
   moveByOneDay = (date) => {
-    date.setDate(date.getDate() + 1);
     return date;
   };
 
