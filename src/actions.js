@@ -371,12 +371,6 @@ export function fetchUserProduct(username) {
           enrolmentPeriodEndDate
           membershipTypes {
             id
-           region{
-            id
-           }
-           district{
-            id
-           }
            levelType
            levelIndex
            price
