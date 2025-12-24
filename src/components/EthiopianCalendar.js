@@ -51,10 +51,23 @@ function EthiopianCalendar(props) {
     };
   }, []);
 
+  //this function is necessary to avoid date shifting due to timezone differences
+  function normalizeDateToNoon(dateString) {
+    const date = new Date(dateString);
+
+    date.setHours(12, 0, 0, 0);
+
+    return date;
+  }
+
+
   useEffect(() => {
     if (dateInputRef.current && props.value) {
       try {
-        dateInputRef.current.value = convertToEthiopianDate(new Date(props.value).toISOString().substr(0, 10));
+
+        let val = convertToEthiopianDate(new Date(normalizeDateToNoon(props.value)).toISOString().substr(0, 10));
+
+        dateInputRef.current.value = val;
       } catch (error) {
         console.error("Error setting date input value:", error);
       }
