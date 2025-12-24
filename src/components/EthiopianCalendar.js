@@ -50,11 +50,26 @@ function EthiopianCalendar(props) {
       }
     };
   }, []);
+  function normalizeTo12Hour(dateString) {
+    const date = new Date(dateString);
+    const hours = date.getHours();
 
+    if (hours < 12) {
+      date.setHours(12, 0, 0, 0);
+    } else {
+      date.setDate(date.getDate() + 1);
+      date.setHours(0, 0, 0, 0);
+    }
+
+    return date;
+  }
   useEffect(() => {
     if (dateInputRef.current && props.value) {
       try {
-        dateInputRef.current.value = convertToEthiopianDate(new Date(props.value).toISOString().substr(0, 10));
+
+        let val = convertToEthiopianDate(new Date(normalizeTo12Hour(props.value)).toISOString().substr(0, 10));
+
+        dateInputRef.current.value = val;
       } catch (error) {
         console.error("Error setting date input value:", error);
       }
