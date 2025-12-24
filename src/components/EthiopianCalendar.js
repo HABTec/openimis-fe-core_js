@@ -54,17 +54,13 @@ function EthiopianCalendar(props) {
   //this function is necessary to avoid date shifting due to timezone differences
   function normalizeDateToNoon(dateString) {
     const date = new Date(dateString);
-    const hours = date.getHours();
 
-    if (hours < 12) {
-      date.setHours(12, 0, 0, 0);
-    } else {
-      date.setDate(date.getDate() + 1);
-      date.setHours(0, 0, 0, 0);
-    }
+    date.setHours(12, 0, 0, 0);
 
     return date;
   }
+
+
   useEffect(() => {
     if (dateInputRef.current && props.value) {
       try {
