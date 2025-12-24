@@ -187,7 +187,6 @@ export const useUserQuery = () => {
         phone
         iUser {
           id
-          uuid
           language {
             code
             name
