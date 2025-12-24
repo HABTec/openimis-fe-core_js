@@ -50,7 +50,9 @@ function EthiopianCalendar(props) {
       }
     };
   }, []);
-  function normalizeTo12Hour(dateString) {
+
+  //this function is necessary to avoid date shifting due to timezone differences
+  function normalizeDateToNoon(dateString) {
     const date = new Date(dateString);
     const hours = date.getHours();
 
@@ -67,7 +69,7 @@ function EthiopianCalendar(props) {
     if (dateInputRef.current && props.value) {
       try {
 
-        let val = convertToEthiopianDate(new Date(normalizeTo12Hour(props.value)).toISOString().substr(0, 10));
+        let val = convertToEthiopianDate(new Date(normalizeDateToNoon(props.value)).toISOString().substr(0, 10));
 
         dateInputRef.current.value = val;
       } catch (error) {
