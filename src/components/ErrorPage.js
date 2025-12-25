@@ -42,11 +42,11 @@ const ErrorPage = ({ status, title, description, logo, back }) => {
     <div className={classes.container}>
       {logo && <img className={classes.logo} src={logo} alt="Logo of openIMIS" />}
       {status && (
-        <Typography variant="h1" className={classes.title}>
-          {status}
+        <Typography variant="h5" className={classes.title}>
+          
         </Typography>
       )}
-      <Typography variant="h2" className={classes.title}>
+      <Typography variant="h5" className={classes.title}>
         {title}
       </Typography>
       <Typography variant="body1" className={classes.description}>
